@@ -108,7 +108,7 @@ function App() {
         localStorage.setItem('accessToken', data.tokens.accessToken);
         localStorage.setItem('accessTokenExpiryDate', data.tokens.accessTokenExpiryDate);
 
-        return Promise.all([loadUserPortfolio(), loadPortfolios()]);
+        return Promise.all([loadUserPortfolio(), loadPortfolios(), loadAccessCode()]);
       })
       .catch(error => {
         console.error('Error refreshing token', error);
@@ -134,7 +134,7 @@ function App() {
       })
       .catch(error => {
         console.error('Error fetching user portfolio', error);
-        alert('Fehler beim Laden des Benutzerportfolios!');
+        //alert('Fehler beim Laden des Benutzerportfolios!');
       });
   };
 
@@ -204,7 +204,7 @@ function App() {
       })
       .catch(error => {
         console.error('Error fetching access code', error);
-        alert('Fehler beim Laden des Zugangscodes!');
+        //alert('Fehler beim Laden des Zugangscodes!');
       });
   };
 
