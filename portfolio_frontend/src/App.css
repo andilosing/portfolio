@@ -1,0 +1,427 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Sorgt dafür, dass Padding und Border in der Elementgröße enthalten sind */
+}
+
+html, body {
+  height: 100%;  /* Stellen Sie sicher, dass html und body die volle Höhe einnehmen */
+  display: flex;
+  flex-direction: column;  /* Flexibles Layout ermöglichen */
+  background-color: #252525;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main{
+  padding: 0 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+input{
+  border-radius: 5px;
+  border: 1px solid #3a3a3a;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+
+.App {
+  height: 100%;  /* Stellen Sie sicher, dass Ihre App-Component die volle verfügbare Höhe einnimmt */
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER LEISTE */
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #2c2c2c;
+  border-bottom: 1px solid #333;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.auth-buttons button {
+  background-color: #4a90e2;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+  background-color: #2f77c8;
+}
+
+
+/* LOGIN FENSTER  */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #252525; 
+  z-index: 1000; 
+}
+
+.login-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2c2c2c;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-modal h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-modal input {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #3a3a3a;
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.login-modal input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.login-modal button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-modal button:hover {
+  background-color: #2f77c8;
+}
+
+.login-modal .cancel-button {
+  background-color: #777777;
+  margin-top: 10px;
+}
+
+.login-modal .cancel-button:hover {
+  background-color: #555555;
+}
+
+@media (max-width: 650px) {
+  .login-modal {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px; /* Optional: reduziert das Padding auf kleinen Bildschirmen */
+  }
+}
+
+/* TABS */
+
+.tabs {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+}
+
+.tab-button {
+  background-color: #252525;
+  color: #ffffff;
+  border: none;
+  padding:  5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px 5px 0 0;
+  margin-right: 5px;
+  transition: background-color 0.5s, color 0.5s, transform 0.5s;
+  flex-shrink: 1;
+}
+
+.tab-button.active,
+.tab-button:hover {
+  border-bottom: 2px solid #4a90e2;
+  color: #ffffff;
+}
+
+.tab-button.active {
+  transform: translateY(-5px); /* Tabs optisch höher machen */
+  z-index: 1;
+}
+
+
+
+/* Anpassung für kleinere Bildschirme */
+@media (max-width: 600px) {
+  .tab-button {
+    font-size: 14px;
+  }
+}
+
+
+/* UPDATE PORTFOLIO ASSSET */
+
+.portfolio-details {
+  padding: 20px;
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.update-portfolio-assets{
+  
+}
+
+.update-assets{
+  padding: 20px;
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.update-assets h3 {
+  margin-top: 0;
+}
+
+.update-assets ul {
+  list-style: none;
+  padding: 0;
+}
+
+.asset-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.asset-item:last-child{
+  margin-bottom: 0;
+}
+
+.asset-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.asset-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  object-fit: contain;  
+  object-position: center;
+}
+
+.asset-name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.asset-quantity {
+  font-size: 14px;
+  color: #bbbbbb;
+}
+
+.quantity-input {
+  padding: 5px;
+  border: 1px solid #3a3a3a;
+  border-radius: 5px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 100px;
+}
+
+quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Entfernt die Pfeile in Webkit-Browsern (Chrome, Safari) */
+}
+
+.quantity-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.update-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color: #2f77c8;
+}
+
+
+/* FAKE CHART */
+
+.blurred-portfolio {
+  position: relative;
+  filter: blur(10px); /* Blurring effect */
+  pointer-events: none; /* Disable interactions with the blurred content */
+}
+
+
+.access-code-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(44, 44, 44, 0.9); /* Semi-transparent background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.access-code-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.access-code-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #4a90e2;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.access-code-container button:hover {
+  background-color: #2f77c8;
+}
+
+
+
+
+
+.chart-container {
+  flex: 1;  /* Lässt den chart-container den verfügbaren Platz innerhalb der .App ausfüllen */
+  padding: 20px;  /* Fügt ein wenig Abstand um den Chart herum hinzu */
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;  /* Verhindert, dass Höhe und Breite ignoriert werden */
+}
+
+
+/*ACCESS CODE */ 
+
+.access-code-section {
+  padding: 20px;
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.access-code-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.access-code-input-container input {
+  padding: 10px;
+  border: 1px solid #3a3a3a;
+  border-radius: 5px 0 0 5px; /* Runde nur die linken Ecken */
+  background-color: #3a3a3a;
+  color: #ffffff;
+  flex-grow: 1;
+}
+
+.access-code-input-container .toggle-visibility {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  height: 37px;
+  border-left: 1px solid #3a3a3a;
+  border-radius: 0 5px 5px 0; /* Runde nur die rechten Ecken */
+  background-color: #3a3a3a;
+}
+
+.access-code-input-container .change-code-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.access-code-input-container .change-code-button:disabled {
+  background-color: #777777;
+  cursor: not-allowed;
+}
+
+.access-code-input-container .change-code-button:hover:not(:disabled) {
+  background-color: #2f77c8;
+}
+
