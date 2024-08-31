@@ -4,8 +4,6 @@ import ApiService from './ApiService';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const PortfolioDetails = ({ portfolioAssets, updatePortfolioAssetQuantity, isUserPortfolio, accessCode, portfolioId  }) => {
-
-  console.log("portfolio assets: ", portfolioAssets)
  
   const [newAccessCode, setNewAccessCode] = useState('');
   const [showAccessCode, setShowAccessCode] = useState(false);
@@ -18,7 +16,6 @@ const PortfolioDetails = ({ portfolioAssets, updatePortfolioAssetQuantity, isUse
   const handleAccessCodeChange = async () => {
     if (newAccessCode.length === 6) {
         try {
-            console.log(newAccessCode, portfolioId)
           await ApiService.updateAccessCode(newAccessCode, portfolioId);
           setShowAccessCode(false)
           alert('Zugangscode erfolgreich geändert!');

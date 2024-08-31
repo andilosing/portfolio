@@ -108,7 +108,7 @@ function App() {
         localStorage.setItem('accessToken', data.tokens.accessToken);
         localStorage.setItem('accessTokenExpiryDate', data.tokens.accessTokenExpiryDate);
 
-        loadPortfolios();
+        return Promise.all([loadUserPortfolio(), loadPortfolios()]);
       })
       .catch(error => {
         console.error('Error refreshing token', error);
