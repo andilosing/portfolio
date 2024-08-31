@@ -1,0 +1,75 @@
+
+services:
+  eureka-service:
+    image: andilosing/eurekaserver:v8
+    container_name: eureka-service
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  api-gateway:
+    image: andilosing/api-gateway:v7
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      eureka-service:
+        condition: service_healthy
+    networks:
+      - microservices-network
+
+  user-service:
+    image: andilosing/users-service:v8
+    container_name: user-service
+    depends_on:
+      eureka-service:
+        condition: service_healthy
+    networks:
+      - microservices-network
+
+  portfolio-service:
+    image: andilosing/portfolio-service:v8
+    container_name: portfolio-service
+    depends_on:
+      eureka-service:
+        condition: service_healthy
+    networks:
+      - microservices-network
+
+ # postgres:
+ #   image: postgres:latest
+ #   container_name: postgres
+ #   ports:
+ #     - "5432:5432"
+ #   environment:
+ #     POSTGRES_DB: dynamics
+ #     POSTGRES_USER: andi
+ #     POSTGRES_PASSWORD: andi
+ #   volumes:
+ #     - postgres-data:/var/lib/postgresql/data
+ #     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+ #   networks:
+ #     - microservices-network
+
+  frontend:
+    image: andilosing/frontend-service:v8
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
