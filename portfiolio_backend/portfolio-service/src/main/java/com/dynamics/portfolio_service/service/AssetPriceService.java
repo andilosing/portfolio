@@ -28,6 +28,7 @@ public class AssetPriceService {
         ASSET_NAME_MAP.put("FTSE All World (dis)", "VWRL.AS");
         ASSET_NAME_MAP.put("Microstrategy", "MSTR");
         ASSET_NAME_MAP.put("microstrategy", "MSTR");
+
     }
 
     public BigDecimal getCurrentPrice(String assetName) {
@@ -39,7 +40,7 @@ public class AssetPriceService {
 
         return switch (normalizedAssetName) {
             case "bitcoin", "ethereum" -> getCurrentCryptoPriceInEur(normalizedAssetName);
-            case "TSLA", "VWCE.AS", "VWRL.AS" -> getCurrentStockPriceInEur(normalizedAssetName);
+            case "TSLA", "VWCE.AS", "VWRL.AS", "MSTR" -> getCurrentStockPriceInEur(normalizedAssetName);
             default -> throw new RuntimeException("Unknown asset: " + assetName);
         };
     }
