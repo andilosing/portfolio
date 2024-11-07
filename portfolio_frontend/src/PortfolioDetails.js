@@ -34,12 +34,22 @@ const PortfolioDetails = ({ portfolioAssets, updatePortfolioAssetQuantity, isUse
   const targetAssets = ["Tesla", "Microstrategy", "Solana"];
 
   const calculateAdjustmentAmount = () => {
-    const startDate = new Date(2024, 11, 1);
+    const startDate = new Date(2024, 11, 1); // 1. Dezember 2024
     const currentDate = new Date();
+    
+    // Berechnung der Monatsdifferenz ab Dezember 2024
     const monthsDifference = (currentDate.getFullYear() - startDate.getFullYear()) * 12 
                               + (currentDate.getMonth() - startDate.getMonth());
-    return Math.min(12000, Math.max(0, monthsDifference * 1000));
+
+    // Berechnung des dynamischen Abzugsbetrags
+    // Wenn vor dem Startdatum, setze den Abzugsbetrag auf 12.000 €
+    const adjustmentAmount = monthsDifference < 0 
+        ? 12000 
+        : Math.max(0, 12000 - monthsDifference * 1000);
+    
+    return adjustmentAmount;
   };
+
 
   const adjustmentAmount = calculateAdjustmentAmount();
 
