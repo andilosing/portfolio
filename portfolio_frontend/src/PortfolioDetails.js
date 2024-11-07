@@ -31,8 +31,42 @@ const PortfolioDetails = ({ portfolioAssets, updatePortfolioAssetQuantity, isUse
     return <div>Loading...</div>;
   }
 
+  const targetAssets = ["Tesla", "Microstrategy", "Solana"];
+
+  const calculateAdjustmentAmount = () => {
+    const startDate = new Date(2024, 11, 1);
+    const currentDate = new Date();
+    const monthsDifference = (currentDate.getFullYear() - startDate.getFullYear()) * 12 
+                              + (currentDate.getMonth() - startDate.getMonth());
+    return Math.min(12000, Math.max(0, monthsDifference * 1000));
+  };
+
+  const adjustmentAmount = calculateAdjustmentAmount();
+
+  // Berechnung des Gesamtwerts der Ziel-Assets
+  const totalTargetValue = portfolioAssets
+    .filter(asset => targetAssets.includes(asset.asset.name))
+    .reduce((sum, asset) => sum + (asset.quantity * asset.asset.lastValue), 0);
+
+  // Anpassung der Mengen nur für Ziel-Assets, wenn portfolioId gleich 2 ist
+  const adjustedAssets = (portfolioId === 2 && totalTargetValue > 0) 
+    ? portfolioAssets.map(asset => {
+        if (targetAssets.includes(asset.asset.name)) {
+          const originalValue = asset.quantity * asset.asset.lastValue;
+          const adjustmentRatio = adjustmentAmount * (originalValue / totalTargetValue);
+          const adjustedQuantity = asset.quantity - (adjustmentRatio / asset.asset.lastValue);
+          return {
+            ...asset,
+            quantity: adjustedQuantity > 0 ? adjustedQuantity : 0
+          };
+        }
+        return asset;
+      })
+    : portfolioAssets;
+  
+
   // Sortieren der Portfolio Assets nach dem Gesamtwert (absteigend)
-  const sortedAssets = [...portfolioAssets].sort((a, b) => 
+  const sortedAssets = [...adjustedAssets].sort((a, b) => 
     (b.quantity * b.asset.lastValue) - (a.quantity * a.asset.lastValue)
   );
 
