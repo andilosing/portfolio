@@ -38,14 +38,14 @@ public class AssetService {
         return assets.stream().map(asset -> AssetMapper.mapToAssetDto(asset, new AssetDto())).toList();
     }
 
-    @Scheduled(fixedRate = 3600000) // execution every 1 hour
+    @Scheduled(fixedRate = 1800000) // execution every 1 hour
     public void updateAssetPrices(){
         List<Asset> assets = assetRepository.findAll();
 
         for (Asset asset : assets){
             try {
                 updateAssetPriceIfNeeded(asset);
-                Thread.sleep(7 * 60 * 1000);
+                Thread.sleep(3 * 60 * 1000);
             } catch (Exception e) {
               //  throw new RuntimeException("Error in fetching asset prices from extern api: " + e.getMessage());
                 System.out.println("Error in fetching prices from extern api: " + e.getMessage());

@@ -20,6 +20,8 @@ public class AssetPriceService {
         ASSET_NAME_MAP.put("Bitcoin", "bitcoin");
         ASSET_NAME_MAP.put("ethereum", "ethereum");
         ASSET_NAME_MAP.put("Ethereum", "ethereum");
+        ASSET_NAME_MAP.put("Solana", "solana");
+        ASSET_NAME_MAP.put("solana", "solana");
         ASSET_NAME_MAP.put("TSLA", "TSLA");
         ASSET_NAME_MAP.put("Tesla", "TSLA");
         ASSET_NAME_MAP.put("VWRL", "VWRL");
@@ -39,7 +41,7 @@ public class AssetPriceService {
         }
 
         return switch (normalizedAssetName) {
-            case "bitcoin", "ethereum" -> getCurrentCryptoPriceInEur(normalizedAssetName);
+            case "bitcoin", "ethereum", "solana" -> getCurrentCryptoPriceInEur(normalizedAssetName);
             case "TSLA", "VWCE.AS", "VWRL.AS", "MSTR" -> getCurrentStockPriceInEur(normalizedAssetName);
             default -> throw new RuntimeException("Unknown asset: " + assetName);
         };
