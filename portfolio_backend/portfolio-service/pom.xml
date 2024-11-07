@@ -100,7 +100,7 @@
 				<version>3.4.1</version>
 				<configuration>
 					<to>
-						<image>andilosing/${project.artifactId}:v8</image>
+						<image>andilosing/${project.artifactId}:v9</image>
 					</to>
 				</configuration>
 			</plugin>
