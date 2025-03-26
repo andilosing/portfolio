@@ -238,6 +238,7 @@ function App() {
           portfolioAssets={details.portfolioAssets || []}
           updatePortfolioAssetQuantity={updatePortfolioAssetQuantity}
           isUserPortfolio={portfolio.portfolioId === userPortfolio?.portfolioId}
+          portfolioId={portfolio.portfolioId}
         />
       );
     }

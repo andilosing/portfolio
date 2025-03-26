@@ -30,53 +30,9 @@ const PortfolioDetails = ({ portfolioAssets, updatePortfolioAssetQuantity, isUse
   if (!portfolioAssets || !portfolioAssets) {
     return <div>Loading...</div>;
   }
-
-  const targetAssets = ["Tesla", "Microstrategy", "Solana"];
-
-  const calculateAdjustmentAmount = () => {
-    const startDate = new Date(2024, 11, 1); // 1. Dezember 2024
-    const currentDate = new Date();
-    
-    // Berechnung der Monatsdifferenz ab Dezember 2024
-    const monthsDifference = (currentDate.getFullYear() - startDate.getFullYear()) * 12 
-                              + (currentDate.getMonth() - startDate.getMonth());
-
-    // Berechnung des dynamischen Abzugsbetrags
-    // Wenn vor dem Startdatum, setze den Abzugsbetrag auf 12.000 €
-    const adjustmentAmount = monthsDifference < 0 
-        ? 12000 
-        : Math.max(0, 12000 - monthsDifference * 1000);
-    
-    return adjustmentAmount;
-  };
-
-
-  const adjustmentAmount = calculateAdjustmentAmount();
-
-  // Berechnung des Gesamtwerts der Ziel-Assets
-  const totalTargetValue = portfolioAssets
-    .filter(asset => targetAssets.includes(asset.asset.name))
-    .reduce((sum, asset) => sum + (asset.quantity * asset.asset.lastValue), 0);
-
-  // Anpassung der Mengen nur für Ziel-Assets, wenn portfolioId gleich 2 ist
-  const adjustedAssets = (portfolioId === 2 && totalTargetValue > 0) 
-    ? portfolioAssets.map(asset => {
-        if (targetAssets.includes(asset.asset.name)) {
-          const originalValue = asset.quantity * asset.asset.lastValue;
-          const adjustmentRatio = adjustmentAmount * (originalValue / totalTargetValue);
-          const adjustedQuantity = asset.quantity - (adjustmentRatio / asset.asset.lastValue);
-          return {
-            ...asset,
-            quantity: adjustedQuantity > 0 ? adjustedQuantity : 0
-          };
-        }
-        return asset;
-      })
-    : portfolioAssets;
   
-
   // Sortieren der Portfolio Assets nach dem Gesamtwert (absteigend)
-  const sortedAssets = [...adjustedAssets].sort((a, b) => 
+  const sortedAssets = [...portfolioAssets].sort((a, b) => 
     (b.quantity * b.asset.lastValue) - (a.quantity * a.asset.lastValue)
   );
 
