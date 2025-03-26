@@ -58,7 +58,7 @@ services:
  #     - microservices-network
 
   frontend:
-    image: andilosing/frontend-service:v8
+    image: andilosing/frontend-service:v13
     container_name: frontend
     ports:
       - "3000:80"
